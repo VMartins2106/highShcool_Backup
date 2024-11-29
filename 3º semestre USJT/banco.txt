@@ -1,0 +1,31 @@
+CREATE DATABASE BD_Integratudo
+
+CREATE TABLE tbInstituicao(
+  cnpj INTEGER PRIMARY KEY,
+  nome VARCHAR(25) NOT NULL,
+  email VARCHAR(35) NOT NULL,
+  telefone INT NOT NULL,
+  regiao VARCHAR(15) NOT NULL,
+  senha VARCHAR(12) NOT NULL,
+);
+
+CREATE TABLE tbEmail(
+  codEmail INTEGER PRIMARY KEY,
+  fkCnpj INT FOREIGN KEY REFERENCES tbInstituicao (cnpj) NOT NULL,
+  fkCodItem INT FOREIGN KEY REFERENCES tbItem (codItem) NOT NULL,
+  assunto VARCHAR(100),
+  destinatario VARCHAR(50) NOT NULL,
+);
+
+CREATE TABLE tbPublicacao(
+  codPubli INTEGER PRIMARY KEY,
+  fkCodItem INT FOREIGN KEY REFERENCES tbItem (codItem) NOT NULL,
+  item VARCHAR(25) NOT NULL,
+  descricao VARCHAR(100) NOT NULL,
+);
+
+CREATE TABLE tbItem(
+  codItem INTEGER PRIMARY KEY,
+  fkCNPJ INT FOREIGN KEY REFERENCES tbInstituicao (cnpj) NOT NULL,
+  quantidade int NOT NULL,
+);
